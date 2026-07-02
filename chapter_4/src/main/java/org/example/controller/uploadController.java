@@ -20,7 +20,10 @@ import java.util.UUID;
 
 @RestController
 public class uploadController {
-
+     @GetMapping("/hello")
+    public String hello(){
+        return "hello world";
+    }
     SimpleDateFormat sdf = new SimpleDateFormat("yyy/MM/dd/");
     @GetMapping("/")
     public ModelAndView index(){
