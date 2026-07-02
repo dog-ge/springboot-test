@@ -30,3 +30,6 @@ public class CustomExceptionHandler {
 
 ![](images/mvc2.png)
 
+### 四，AOP
+访问http://localhost:8080/getUserById?id=1
+![](images/aop.png)
