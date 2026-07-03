@@ -1,0 +1,19 @@
+spring:
+  redis:
+    password: public_456
+    cluster:
+      nodes:
+        - 192.168.239.136:6379
+        - 192.168.239.137:6380
+        - 192.168.239.138:6381
+        - 192.168.239.137:6383
+        - 192.168.239.138:6384
+        - 192.168.239.136:6382
+      max-redirects: 3
+    jedis:
+      pool:
+        max-active: 20
+        max-idle: 10
+        min-idle: 5
+        max-wait: 3000ms
+    timeout: 5000ms
