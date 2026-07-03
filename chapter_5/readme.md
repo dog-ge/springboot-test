@@ -15,3 +15,14 @@ BookMapper和BookMapper.xml映射关系
 ![](images/xml_location.png)
 运行结果:
 ![](images/2.png)
+
+
+### 3.springboot data jpa 整合
+jpa实体和数据库表的对应关系
+![](images/jpa实体和数据库表的对应关系.png)
+
+dao层需要继承一个JpaRepository 接口
+
+![](images/3.png)
+运行结果
+![](images/jpa_result.png)
