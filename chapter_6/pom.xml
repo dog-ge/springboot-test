@@ -12,6 +12,7 @@
   <modules>
     <module>single_redis_demo</module>
       <module>redis_cluster_demo</module>
+      <module>mongodb_demo</module>
   </modules>
 
   <properties>

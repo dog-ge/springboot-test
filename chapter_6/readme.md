@@ -1,7 +1,7 @@
 ### 一.redis 单节点 安装
 
 docker run -d --name my-redis -p 6379:6379 redis
-![img.png](images/img.png)
+![img.png](images/mongo.png)
 
 ### 二.redis cluster 集群搭建
 
@@ -207,3 +207,12 @@ docker exec -it redis-6379 redis-cli -a public_456 --no-auth-warning -c -p 6379 
 接入代码详见 redis_cluster_demo模块
 运行执行结果
 ![](images/2.png)
+
+
+### 四，mongodb接入
+
+docker run -d --name my-mongodb -p 27017:27017 \
+-e MONGO_INITDB_ROOT_USERNAME=admin \
+-e MONGO_INITDB_ROOT_PASSWORD=public_456 \
+-v mongo-data:/data/db \
+mongo:7![img.png](images/mongo.png)
