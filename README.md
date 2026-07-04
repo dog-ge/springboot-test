@@ -32,3 +32,9 @@ springboot整合视图
 2. springboot整合redis cluster集群
 3. springboot整合mongodb
 4. 利用redis替换spring session实现session共享
+
+[第十章](chapter_10/readme.md)
+
+1. spring security 结合mysql认证授权
+2. oauth2 认证授权
+3. shiro 认证授权

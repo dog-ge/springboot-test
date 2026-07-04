@@ -12,6 +12,7 @@
   <modules>
     <module>spring-security-databases</module>
       <module>oauth2_demo</module>
+    <module>shiro-demo</module>
   </modules>
 
   <properties>

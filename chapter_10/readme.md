@@ -60,7 +60,7 @@ INSERT INTO `user_role` (`id`, `uid`, `rid`) VALUES
 
 
 
-### oauth2
+### 二，oauth2认证授权
 ```
 curl -X POST "http://localhost:8080/oauth/token" \             
   -u "password:123" \                          
@@ -79,3 +79,8 @@ http://localhost:8080/user/hello?access_token=c58121a1-60f1-42e8-9c77-0663b1b198
 遇到问题,oauth2 不能接入redis-cluster，有冲突
 Spring Security OAuth2 的 RedisTokenStore 在设计上和 Redis Cluster 的分片机制冲突导致的
 ![](images/遇到问题.png)
+
+### 三，shiro 认证授权
+![](images/user1.png)
+admin用户
+![](images/admin.png)
