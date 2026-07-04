@@ -56,3 +56,26 @@ INSERT INTO `user_role` (`id`, `uid`, `rid`) VALUES
 ![](images/403.png)
 当使用用户名 db 密码 123 登录访问localhost:8080/dba/hello 时，发现能够访问
 ![](images/ok.png)
+
+
+
+
+### oauth2
+```
+curl -X POST "http://localhost:8080/oauth/token" \             
+  -u "password:123" \                          
+  -d "grant_type=password" \      
+  -d "username=sang" \                                                                               
+  -d "password=123" \
+  -d "scope=all"
+```
+```
+http://localhost:8080/user/hello?access_token=c58121a1-60f1-42e8-9c77-0663b1b19841
+```
+使用token访问
+![](images/oauth2_result.png)
+
+
+遇到问题,oauth2 不能接入redis-cluster，有冲突
+Spring Security OAuth2 的 RedisTokenStore 在设计上和 Redis Cluster 的分片机制冲突导致的
+![](images/遇到问题.png)
