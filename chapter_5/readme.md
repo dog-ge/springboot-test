@@ -16,7 +16,9 @@ BookMapper和BookMapper.xml映射关系
 运行结果:
 ![](images/2.png)
 
-
+mybatis多表查询
+![](images/mybatis多表查询.png)
+![](images/多表查询运行结果.png)
 ### 3.springboot data jpa 整合
 jpa实体和数据库表的对应关系
 ![](images/jpa实体和数据库表的对应关系.png)
