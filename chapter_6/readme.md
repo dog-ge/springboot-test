@@ -216,3 +216,100 @@ docker run -d --name my-mongodb -p 27017:27017 \
 -e MONGO_INITDB_ROOT_PASSWORD=public_456 \
 -v mongo-data:/data/db \
 mongo:7![img.png](images/mongo.png)
+
+
+### 五，使用redis进行session共享
+
+代码在redis_cluster_demo模块，
+1.设置idea
+![](images/idea多开.png)
+2.先配置application.ymal
+server:
+port: 8080
+启动程序
+3.修改application.ymal
+server:
+port: 8081
+启动程序
+
+4.部署nginx
+
+mkdir -p ~/nginx/{conf,conf.d,html,logs}
+修改宿主机的~/nginx/conf/nginx.conf
+```
+user  nginx;
+worker_processes  auto;
+
+error_log  /var/log/nginx/error.log notice;
+pid        /var/run/nginx.pid;
+
+events {
+    worker_connections  1024;
+}
+
+http {
+    include       /etc/nginx/mime.types;
+    default_type  application/octet-stream;
+
+    log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
+                      '$status $body_bytes_sent "$http_referer" '
+                      '"$http_user_agent" "$http_x_forwarded_for"';
+
+    access_log  /var/log/nginx/access.log  main;
+
+    sendfile        on;
+    tcp_nopush      on;
+    tcp_nodelay     on;
+    keepalive_timeout  65;
+    gzip  on;
+
+    # ------------------- 负载均衡上游服务器组 -------------------
+    upstream test.com {
+        server 192.168.66.130:8080 weight=1;
+        server 192.168.66.130:8081 weight=1;
+    }
+
+    # ------------------- 反向代理 server 配置 -------------------
+    server {
+        listen       80;
+        server_name  localhost;
+
+        location / {
+            proxy_pass http://test.com;
+            proxy_redirect default;
+
+            # 建议补充的代理请求头,避免后端拿不到真实客户端信息
+            proxy_set_header Host $host;
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header X-Forwarded-Proto $scheme;
+
+            # 超时时间(可根据后端服务情况调整)
+            proxy_connect_timeout 30s;
+            proxy_send_timeout    60s;
+            proxy_read_timeout    60s;
+        }
+
+        error_page   500 502 503 504  /50x.html;
+        location = /50x.html {
+            root   /usr/share/nginx/html;
+        }
+    }
+}
+```
+docker run -d \
+--name my-nginx \
+-p 8080:80 \
+-v ~/nginx/conf/nginx.conf:/etc/nginx/nginx.conf:ro \
+-v ~/nginx/html:/usr/share/nginx/html:ro \
+-v ~/nginx/logs:/var/log/nginx \
+--restart=always \
+nginx
+
+session请求
+![](images/set.png)
+首次访问,被nginx反向代理到了192.168.66.130:8081
+![](images/first1.png)
+第二次访问反向代理到了 192.168.66.130:8081
+![](images/second.png)
+实现了 session共享

@@ -2,11 +2,14 @@ package org.example.controller;
 
 import org.example.bean.Book;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.servlet.http.HttpSession;
 
 @RestController
 public class BookController {
@@ -31,4 +34,16 @@ public class BookController {
         Book book = (Book) ops2.get("b1");
         System.out.println(book);
     }
+    @Value("${server.port}")
+    String port;
+    @GetMapping("/save")
+    public String saveName(String name, HttpSession session) {
+       session.setAttribute("name",name);
+       return port;
+    }
+    @GetMapping("/get")
+    public String getName(HttpSession session){
+        return port+":"+session.getAttribute("name").toString();
+    }
+
 }
