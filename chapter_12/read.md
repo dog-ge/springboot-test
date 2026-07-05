@@ -92,3 +92,7 @@ docker run -d \
 ![](images/topic1.png)
 交换机和队列通过 匹配规则绑定
 ![](images/topic2.png)
+
+4. header模式
+   根据消息 Header 键值对 匹配
+![](images/header模式.png)
