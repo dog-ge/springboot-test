@@ -84,4 +84,6 @@ docker run -d \
 ![](images/direct1.png)
 ![](images/direct2.png)
 
+2.广播模式
 
+![](images/广播1.png)

@@ -1,5 +1,6 @@
 package org.example;
 
+import org.example.config.RabbitFanoutConfig;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
@@ -16,5 +17,12 @@ public class RabbitmqApplicationTests {
     @Test
     public void directTest() {
         rabbitTemplate.convertAndSend("hello-queue", "hello direct123!");
+    }
+
+
+    @Test
+    public void fanoutTest() {
+        rabbitTemplate.convertAndSend(RabbitFanoutConfig.FANOUTNAME,
+                null, "hello fanout!");
     }
 }
