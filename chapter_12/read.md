@@ -87,3 +87,8 @@ docker run -d \
 2.广播模式
 
 ![](images/广播1.png)
+
+3.topic 模式
+![](images/topic1.png)
+交换机和队列通过 匹配规则绑定
+![](images/topic2.png)
