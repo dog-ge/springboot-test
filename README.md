@@ -38,3 +38,7 @@ springboot整合视图
 1. spring security 结合mysql认证授权
 2. oauth2 认证授权
 3. shiro 认证授权
+
+[第十一章](chapter_11/readme.md)
+1. websocket 广播推送消息
+2. websocket 单对单发送消息
