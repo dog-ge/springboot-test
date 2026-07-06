@@ -12,6 +12,7 @@
   <modules>
     <module>ActiveMQ</module>
     <module>RabbitMQ</module>
+    <module>Kafka_demo</module>
   </modules>
 
   <properties>

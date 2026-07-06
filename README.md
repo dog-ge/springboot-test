@@ -42,3 +42,8 @@ springboot整合视图
 [第十一章](chapter_11/readme.md)
 1. websocket 广播推送消息
 2. websocket 单对单发送消息
+
+[第十二章](chapter_12/read.md)
+1. active mq 接入
+2. rabbitmq 接入（direct,Fanout,topic,header模式）
+3. kafka 接入

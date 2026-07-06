@@ -96,3 +96,37 @@ docker run -d \
 4. header模式
    根据消息 Header 键值对 匹配
 ![](images/header模式.png)
+
+### 三，kafka
+![](images/kafka原理.png)
+
+```bazaar
+docker run -d \
+  --name kafka \
+  -p 9092:9092 \
+  -e KAFKA_NODE_ID=1 \
+  -e KAFKA_PROCESS_ROLES=broker,controller \
+  -e KAFKA_LISTENERS=PLAINTEXT://:9092,CONTROLLER://:9093 \
+  -e KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://192.168.239.137:9092 \
+  -e KAFKA_CONTROLLER_LISTENER_NAMES=CONTROLLER \
+  -e KAFKA_CONTROLLER_QUORUM_VOTERS=1@localhost:9093 \
+  -e KAFKA_LISTENER_SECURITY_PROTOCOL_MAP=CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT \
+  -e CLUSTER_ID=MkU3OEVBNTcwNTJENDM2Qk \
+  apache/kafka:3.9.0
+```
+创建一个topic
+
+
+
+```bazaar
+
+docker exec -it kafka /opt/kafka/bin/kafka-topics.sh \
+  --create \
+  --topic test-topic \
+  --bootstrap-server localhost:9092 \
+  --partitions 1 \
+  --replication-factor 1
+```
+访问: http://127.0.0.1:8080/test
+查看控制台
+![img.png](images/img.png)
